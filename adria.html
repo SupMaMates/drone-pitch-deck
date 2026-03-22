@@ -1,0 +1,444 @@
+```html
+<!doctype html>
+<html lang="bs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#02050d" />
+  <title>Sky Branding i Drone Show | Prezentacija</title>
+  <meta name="description" content="Interaktivna Reveal.js prezentacija sa MP4 video pozadinama." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme" />
+
+  <style>
+    :root {
+      --bg: #02050d;
+      --panel: rgba(7, 12, 24, 0.52);
+      --panel-strong: rgba(7, 12, 24, 0.66);
+      --border: rgba(255, 255, 255, 0.16);
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.82);
+      --accent: #00f3ff;
+      --accent-soft: rgba(0, 243, 255, 0.12);
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow: hidden;
+    }
+
+    ::selection {
+      background: rgba(0, 243, 255, 0.22);
+      color: #fff;
+    }
+
+    .reveal-viewport {
+      background: var(--bg);
+    }
+
+    .reveal {
+      font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+    }
+
+    .reveal .slides {
+      text-align: left;
+    }
+
+    .reveal .slides section {
+      width: 100%;
+      height: 100%;
+      padding: clamp(18px, 3.8vh, 48px) clamp(18px, 4vw, 72px);
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .reveal .slides section.overlay-dark::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.58)),
+        radial-gradient(circle at top center, rgba(0, 243, 255, 0.06), transparent 35%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .slide-shell {
+      width: min(1120px, 92vw);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .glass-card {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding: clamp(24px, 3vw, 44px);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(7, 12, 24, 0.68), rgba(7, 12, 24, 0.48));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .glass-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 26%, transparent 68%, rgba(0, 243, 255, 0.08));
+      pointer-events: none;
+    }
+
+    .glass-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .accent-line {
+      width: 88px;
+      height: 4px;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), rgba(0, 243, 255, 0.12));
+      box-shadow: 0 0 24px rgba(0, 243, 255, 0.55);
+    }
+
+    .slide-title {
+      margin: 0;
+      font-size: clamp(2.1rem, 4.9vw, 4.7rem);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+      text-transform: uppercase;
+      text-wrap: balance;
+      text-shadow: 0 8px 32px rgba(0, 0, 0, 0.24);
+    }
+
+    .slide-subtitle {
+      margin: 12px 0 24px;
+      font-size: clamp(1rem, 1.45vw, 1.35rem);
+      line-height: 1.45;
+      color: var(--muted);
+      font-weight: 500;
+      text-wrap: balance;
+    }
+
+    .clean-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .clean-list li {
+      position: relative;
+      margin: 0;
+      padding-left: 1.55rem;
+      font-size: clamp(1rem, 1.28vw, 1.24rem);
+      line-height: 1.48;
+      text-wrap: pretty;
+    }
+
+    .clean-list li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      top: 0.02rem;
+      color: var(--accent);
+      text-shadow: 0 0 14px rgba(0, 243, 255, 0.7);
+    }
+
+    .accent {
+      color: var(--accent);
+      text-shadow: 0 0 18px rgba(0, 243, 255, 0.35);
+    }
+
+    .highlight-box {
+      margin-top: 24px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(0, 243, 255, 0.10);
+      border: 1px solid rgba(0, 243, 255, 0.28);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 16px 36px rgba(0, 243, 255, 0.08);
+      font-size: clamp(1rem, 1.22vw, 1.16rem);
+      line-height: 1.45;
+    }
+
+    .reveal .backgrounds video {
+      object-fit: cover;
+      filter: brightness(0.50) saturate(1.05) contrast(1.02);
+    }
+
+    .reveal .controls {
+      color: var(--accent);
+      filter: drop-shadow(0 0 12px rgba(0, 243, 255, 0.35));
+    }
+
+    .reveal .progress {
+      color: var(--accent);
+      height: 4px;
+    }
+
+    .reveal .progress span {
+      box-shadow: 0 0 18px rgba(0, 243, 255, 0.55);
+    }
+
+    .reveal .slide-number {
+      right: 20px !important;
+      bottom: 18px !important;
+      background: rgba(7, 12, 24, 0.58);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      padding: 6px 10px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .reveal .fragment.fade-up {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    .reveal .fragment.fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .reveal .slides section {
+        padding: 18px;
+      }
+
+      .glass-card {
+        padding: 22px;
+        border-radius: 22px;
+      }
+
+      .clean-list {
+        gap: 0.75rem;
+      }
+
+      .highlight-box {
+        margin-top: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal .fragment,
+      .reveal .backgrounds video,
+      .glass-card,
+      .glass-card::before {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section
+        class="overlay-dark"
+        data-background-video="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+        data-background-video-loop
+        data-background-video-muted
+        data-background-size="cover"
+        data-background-position="center center"
+        data-background-cover
+        data-background-opacity="0.35"
+      >
+        <div class="slide-shell">
+          <article class="glass-card">
+            <div class="accent-line"></div>
+            <h1 class="slide-title">KO SMO MI</h1>
+            <p class="slide-subtitle">Prva <span class="accent">sky branding</span> kompanija u svijetu</p>
+
+            <ul class="clean-list">
+              <li class="fragment fade-up" data-fragment-index="1">
+                Jedna reklama za cijeli grad, vidljivost do <span class="accent">10 km</span>
+              </li>
+              <li class="fragment fade-up" data-fragment-index="2">
+                <span class="accent">100 nastupa</span> / preko <span class="accent">32 ključna događaja</span> (festivali, koncerti, sportske i kulturne manifestacije)
+              </li>
+              <li class="fragment fade-up" data-fragment-index="3">
+                <span class="accent">300.000 ljudi</span> po noći, bez mogućnosti skrolanja
+              </li>
+              <li class="fragment fade-up" data-fragment-index="4">
+                <span class="accent">30M+</span> godišnji reach (+ Instagram + TikTok + PR + TV)
+              </li>
+              <li class="fragment fade-up" data-fragment-index="5">
+                Prvi i jedini format koji dominira nebom u regionu, <span class="accent">bez konkurencije</span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section
+        data-background-video="https://www.w3schools.com/howto/rain.mp4"
+        data-background-video-loop
+        data-background-video-muted
+        data-background-size="cover"
+        data-background-position="center center"
+        data-background-cover
+      >
+        <div class="slide-shell">
+          <article class="glass-card">
+            <div class="accent-line"></div>
+            <h2 class="slide-title">MEDIJ KOJI ZAUSTAVLJA PUBLIKU</h2>
+
+            <ul class="clean-list">
+              <li class="fragment fade-up" data-fragment-index="1">
+                <span class="accent">100% pažnja</span> publike, bez skrolanja, distrakcija ili promjene kanala
+              </li>
+              <li class="fragment fade-up" data-fragment-index="2">
+                Nebo je pozornica, a cijeli grad publika od <span class="accent">7 do 77 godina</span>
+              </li>
+              <li class="fragment fade-up" data-fragment-index="3">
+                Dominacija na nebu i trendsetting → brend postaje <span class="accent">centralni fokus</span>
+              </li>
+              <li class="fragment fade-up" data-fragment-index="4">
+                Visok emocionalni utisak → publika pamti iskustvo i doživljava ga kao doživljaj, a ne kao reklamu
+              </li>
+              <li class="fragment fade-up" data-fragment-index="5">
+                Jedini format koji fizički zaustavlja ljude u prostoru — prekida zagrljaj, poljubac, razgovor i vrlo vjerovatno vezu… ali s drugim brendom
+              </li>
+            </ul>
+
+            <div class="highlight-box fragment fade-up" data-fragment-index="6">
+              <span class="accent">👉 Format koji prirodno generiše digitalni reach kroz dijeljenje</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section
+        data-background-video="https://www.w3schools.com/html/mov_bbb.mp4"
+        data-background-video-loop
+        data-background-video-muted
+        data-background-size="cover"
+        data-background-position="center center"
+        data-background-cover
+      >
+        <div class="slide-shell">
+          <article class="glass-card">
+            <div class="accent-line"></div>
+            <h2 class="slide-title">VIRALNOST I KREATIVA</h2>
+            <p class="slide-subtitle">Svaki show postaje reklama koju publika želi da gleda i dijeli</p>
+
+            <ul class="clean-list">
+              <li class="fragment fade-up" data-fragment-index="1">
+                <span class="accent">3D animacije</span> i storytelling na nebu (bez dodatne produkcije)
+              </li>
+              <li class="fragment fade-up" data-fragment-index="2">
+                Ograničen broj slotova → <span class="accent">premium positioning</span> + kategorijska ekskluzivnost
+              </li>
+              <li class="fragment fade-up" data-fragment-index="3">
+                Masivan <span class="accent">UGC</span> (turisti + lokalci + publika događaja)
+              </li>
+              <li class="fragment fade-up" data-fragment-index="4">
+                Organski reach kroz <span class="accent">TikTok, Instagram, portale, TV i live prenose</span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section
+        data-background-video="https://media.w3.org/2010/05/sintel/trailer.mp4"
+        data-background-video-loop
+        data-background-video-muted
+        data-background-size="cover"
+        data-background-position="center center"
+        data-background-cover
+      >
+        <div class="slide-shell">
+          <article class="glass-card">
+            <div class="accent-line"></div>
+            <h2 class="slide-title">SIGURNOST I SARADNJA</h2>
+
+            <ul class="clean-list">
+              <li class="fragment fade-up" data-fragment-index="1">
+                Internacionalni tim, powered by <span class="accent">Drotek &amp; Drone Show Store</span>, sa više od <span class="accent">15 godina iskustva</span>
+              </li>
+              <li class="fragment fade-up" data-fragment-index="2">
+                Ručno proizvedena oprema sa <span class="accent">in-house</span> proizvodnjom hardware i software tehnologije
+              </li>
+              <li class="fragment fade-up" data-fragment-index="3">
+                <span class="accent">5000+</span> izvedenih showova u <span class="accent">20+ zemalja</span>
+              </li>
+              <li class="fragment fade-up" data-fragment-index="4">
+                <span class="accent">100% uspješnost</span> dobijanja dozvola i izvođenja
+              </li>
+              <li class="fragment fade-up" data-fragment-index="5">
+                Pokriveni svi sigurnosni i regulatorni zahtjevi
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      width: 1600,
+      height: 900,
+      margin: 0.04,
+      minScale: 0.2,
+      maxScale: 1.5,
+      hash: true,
+      controls: true,
+      controlsTutorial: false,
+      controlsLayout: "edges",
+      controlsBackArrows: "faded",
+      progress: true,
+      slideNumber: "c/t",
+      center: true,
+      touch: true,
+      mouseWheel: true,
+      overview: true,
+      transition: "slide",
+      backgroundTransition: "fade",
+      autoPlayMedia: true,
+      navigationMode: "default",
+      respondToHashChanges: true,
+      viewDistance: 3
+    });
+  </script>
+</body>
+</html>
+```
